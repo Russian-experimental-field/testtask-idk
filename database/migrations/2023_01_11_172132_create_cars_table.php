@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string("manufacturer");
             $table->string("model");
-            $table->string("engine_volume");
+            $table->integer("engine_volume");
             $table->timestamp("manufactured_at");
             $table->bigInteger("added_by")->nullable();
             $table->foreign("added_by")->references('id')->on('users')->nullOnDelete();
