@@ -10,15 +10,6 @@ use Illuminate\Support\Facades\Hash;
 
 class CarsSeeder extends Seeder
 {
-    private function randdate(): string
-    {
-        $initial_date = strtotime('08.12.1962');
-        $update_date = strtotime('05.13.2006');
-        $random_date = rand($initial_date, $update_date);
-
-        return date('Y-m-d H:i:s', $random_date);
-    }
-
     /**
      * Run the database seeds.
      *
@@ -32,14 +23,17 @@ class CarsSeeder extends Seeder
         $users = User::all();
 
         for ($i = 0; $i < 20; $i++) {
+            $created_at = date('Y-m-d H:i:s', time() - rand(1, 3 * 365 * 24 * 3600));
+
+
             DB::table('cars')->insert([
                 'model' => $models->random(),
                 'manufacturer' => $manufs->random(),
                 'engine_volume' => rand(1000, 6000),
                 'manufactured_at' => $dates->random(),
                 'added_by' => $users->random()->id,
-                'created_at' => $this->randdate(),
-                'updated_at' => $this->randdate()
+                'created_at' => $created_at,
+                'updated_at' => $created_at
             ]);
         }
     }

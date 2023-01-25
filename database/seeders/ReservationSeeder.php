@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Car;
+use DateTimeInterface;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -30,14 +31,15 @@ class ReservationSeeder extends Seeder
         for ($i = 0; $i < 35; $i++) {
             $starts_at = $this->randdate();
             $ends_at = strtotime($starts_at) + rand(1800, 5400);
+            $created_at = date(DateTimeInterface::ATOM, strtotime($starts_at) - rand(12, 50) * 3600);
 
             DB::table('reservation')->insert([
                 'user_email' => Str::random(10) . '@gmail.com',
                 'starts_at' => $starts_at,
-                'ends_at' => date('Y-m-d H:i:s', $ends_at),
+                'ends_at' => date(DateTimeInterface::ATOM, $ends_at),
                 'car_id' => $cars->random()->id,
-                'created_at' => $this->randdate(),
-                'updated_at' => $this->randdate()
+                'created_at' => $created_at,
+                'updated_at' => $created_at
             ]);
         }
     }
