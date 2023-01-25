@@ -15,11 +15,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return "доступные машины + мои резервации";
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard/reservations', function () {
+    return "админский список резерваций";
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard/cars', function () {
+    return "админский список автомобилей";
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard/cars/create', function () {
+    return "админский экран добаавления машин";
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -28,4 +40,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
