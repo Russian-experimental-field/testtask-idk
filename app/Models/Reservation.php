@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Car;
 use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
@@ -36,4 +37,9 @@ class Reservation extends Model
      * @var array<string, string>
      */
     protected $casts = [];
+
+    public function car()
+    {
+        return $this->belongsTo(Car::class);
+    }
 }

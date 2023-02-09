@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return "доступные машины + мои резервации";
-});
+Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -25,6 +25,8 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard/reservations', function () {
     return "админский список резерваций";
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/reservation', [ReservationController::class, 'showReservationPage'])->name('reservationPage');
 
 Route::get('/dashboard/cars', function () {
     return "админский список автомобилей";
@@ -39,5 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__ . '/auth.php';
