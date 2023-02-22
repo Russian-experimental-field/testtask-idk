@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ReservationController;
+use App\Models\Reservation;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::get('/dashboard/reservations', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/reservation', [ReservationController::class, 'showReservationPage'])->name('reservationPage');
+
+Route::post("/reservation", [ReservationController::class, 'createReservation'])->name('createReservation');
 
 Route::get('/dashboard/cars', function () {
     return "админский список автомобилей";

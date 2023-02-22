@@ -11,12 +11,16 @@
             {{ $car->manufacturer }} {{ $car->model }}
         </h2>
         <div>
-            <form>
+            <form action="/reservation" method="POST">
+                @csrf
+                <div class="col-sm-10">
+                    <input type="hidden" class="form-control" name="car_id" value="{{ $car->id }}" />
+                </div>
                 <div class="row mb-3">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Время начала</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="starts_at" id="starts_at"
-                            placeholder="01.12.2000 12:00" required>
+                            placeholder="01.12.2000 12:00" required value="{{ old('starts_at') }}">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -36,7 +40,7 @@
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
                         <input type="email" name="email" class="form-control" id="inputEmail3"
-                            placeholder="youremail@example.com" required>
+                            placeholder="youremail@example.com" required value="{{ old('email') }}">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Создать резервацию</button>
