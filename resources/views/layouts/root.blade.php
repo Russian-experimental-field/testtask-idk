@@ -14,13 +14,13 @@
         }
     </style>
     <!-- integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC">-->
-    <title>Сайт - список разбойников - @yield('title')</title>
+    <title>Cars reservation @yield('title')</title>
 </head>
 
 <body>
     @section('content')
         <div class="container">
-            {{-- @include('links') --}}
+            @include('components.links')
         </div>
     @show
 </body>

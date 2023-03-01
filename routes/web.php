@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/dashboard/reservations', function () {
     return "админский список резерваций";
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('adm/reservations');
 
 Route::get('/reservation', [ReservationController::class, 'showReservationPage'])->name('reservationPage');
 
@@ -33,11 +33,11 @@ Route::post("/reservation", [ReservationController::class, 'createReservation'])
 
 Route::get('/dashboard/cars', function () {
     return "админский список автомобилей";
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('adm/cars');
 
 Route::get('/dashboard/cars/create', function () {
     return "админский экран добаавления машин";
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('adm/cars/create');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
