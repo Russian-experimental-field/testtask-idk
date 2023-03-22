@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\AdminController;
 use App\Models\Reservation;
 
 /*
@@ -23,21 +24,21 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard/reservations', function () {
-    return "админский список резерваций";
-})->middleware(['auth', 'verified'])->name('adm/reservations');
+Route::get('/dashboard/reservations', [AdminController::class, 'showAdmResPage'])->middleware(['auth', 'verified'])->name('adm/reservations');
+
+Route::get('/dashboard/cars', [AdminController::class, 'showAdmAddCarsPage'])->middleware(['auth', 'verified'])->name('adm/cars');
+
+Route::get('/dashboard/reservation/cancel', [AdminController::class, 'cancelRes'])->middleware(['auth', 'verified'])->name('adm/reservations/cancel');
+
+Route::get('/dashboard/cars/create', [AdminController::class, 'showCarCreationForm'])->middleware(['auth', 'verified'])->name('adm/cars/create');
+
+Route::post('/dashboard/cars/create', [AdminController::class, 'doAddCar'])->middleware(['auth', 'verified'])->name('adm/cars/create');
+
+Route::get('/dashboard/cars/delete', [AdminController::class, 'deleteCar'])->middleware(['auth', 'verified'])->name('adm/cars/delete');
 
 Route::get('/reservation', [ReservationController::class, 'showReservationPage'])->name('reservationPage');
 
 Route::post("/reservation", [ReservationController::class, 'createReservation'])->name('createReservation');
-
-Route::get('/dashboard/cars', function () {
-    return "админский список автомобилей";
-})->middleware(['auth', 'verified'])->name('adm/cars');
-
-Route::get('/dashboard/cars/create', function () {
-    return "админский экран добаавления машин";
-})->middleware(['auth', 'verified'])->name('adm/cars/create');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

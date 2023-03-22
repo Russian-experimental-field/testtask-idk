@@ -43,7 +43,7 @@ class ReservationController extends BaseController
 
         $reservation = new Reservation();
 
-        $reservation->starts_at = $validated['starts_at'];
+        $reservation->starts_at = date(DateTimeInterface::ATOM, $starts_at);
         $reservation->ends_at = date(DateTimeInterface::ATOM, $ends_at);
         $reservation->user_email = $validated['email'];
         $reservation->car_id = $validated['car_id'];

@@ -29,7 +29,13 @@
                                 <td>{{ $res->created_at }}</td>
                                 <td>{{ $res->starts_at }}</td>
                                 <td>{{ $res->ends_at }}</td>
-                                <td>{{ $res->car->manufacturer }} {{ $res->car->model }}</td>
+                                <td>
+                                    @if ($res->car === null)
+                                        Тачки нет, сорян
+                                    @else
+                                        {{ $res->car->manufacturer }} {{ $res->car->model }}
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
