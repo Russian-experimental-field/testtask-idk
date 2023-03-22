@@ -48,6 +48,26 @@ class ReservationController extends BaseController
         $reservation->user_email = $validated['email'];
         $reservation->car_id = $validated['car_id'];
 
+        //между резервациями окно 10 минут
+
+        $existingReservations = Reservation::where('car_id', $validated['car_id'])->get();
+
+        foreach ($existingReservations as $existingReservation) {
+
+            $start = strtotime($existingReservation->starts_at);
+            $end = strtotime($existingReservation->ends_at);
+            $currentResStart = strtotime($reservation->starts_at);
+            $currentResEnd = strtotime($reservation->ends_at);
+
+            if ($currentResEnd >= $start && $currentResEnd <= $end) {
+                return redirect()->back();
+            }
+
+            if ($currentResStart >= $start && $currentResStart <= $end) {
+                return redirect()->back();
+            }
+        }
+
         $reservation->save();
 
         return redirect('/');
