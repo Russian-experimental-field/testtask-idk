@@ -59,12 +59,8 @@ class ReservationController extends BaseController
             $currentResStart = strtotime($reservation->starts_at);
             $currentResEnd = strtotime($reservation->ends_at);
 
-            if ($currentResEnd >= $start && $currentResEnd <= $end) {
-                return redirect()->back();
-            }
-
-            if ($currentResStart >= $start && $currentResStart <= $end) {
-                return redirect()->back();
+            if (($currentResEnd >= $start && $currentResEnd <= $end) || ($currentResStart >= $start && $currentResStart <= $end)) {
+                return redirect()->back()->withInput($validated)->with('error', 'Ошибка: время бронирования пересекается с другим, или не соблюдён интервал 10 минут');
             }
         }
 

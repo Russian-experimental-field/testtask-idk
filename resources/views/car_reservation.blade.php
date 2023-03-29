@@ -10,6 +10,11 @@
         <h2 style="border: 4px solid blue">
             {{ $car->manufacturer }} {{ $car->model }}
         </h2>
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <div>
             <form action="/reservation" method="POST">
                 @csrf
