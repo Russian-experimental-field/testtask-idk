@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -63,5 +64,18 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function setUserEmailCookie(Request $request)
+    {
+        $userEmail = $request->validate([
+            'useremail' => 'required|email'
+        ]);
+
+        return redirect('/')->cookie(
+            'useremail',
+            $userEmail['useremail'],
+            60 * 24 * 31
+        );
     }
 }
