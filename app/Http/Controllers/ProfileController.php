@@ -65,17 +65,4 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-
-    public function setUserEmailCookie(Request $request)
-    {
-        $userEmail = $request->validate([
-            'useremail' => 'required|email'
-        ]);
-
-        return redirect('/')->cookie(
-            'useremail',
-            $userEmail['useremail'],
-            60 * 24 * 31
-        );
-    }
 }

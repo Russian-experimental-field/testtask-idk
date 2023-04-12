@@ -64,6 +64,17 @@
                         </h2>
                     </div>
                 @endif
+                <form action="/userEmail" method="POST">
+                    @csrf
+                    <div class="mb-1">
+                        <small>Если вы хотите использовать другой e-mail, введите его в поле ниже</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="input-data" class="form-label">Другой email:</label>
+                        <input type="text" class="form-control" id="input-data" name="useremail" placeholder="email">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
             </div>
             <div class="col-6">
                 <p>Avalible cars</p>

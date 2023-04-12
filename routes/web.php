@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\AdminController;
-use App\Models\Reservation;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,14 +41,12 @@ Route::get('/reservation', [ReservationController::class, 'showReservationPage']
 
 Route::post("/reservation", [ReservationController::class, 'createReservation'])->name('createReservation');
 
-Route::post('/userEmail', [ProfileController::class, 'setUserEmailCookie'])->name('setUserEmailCookie');
+Route::post('/userEmail', [UserController::class, 'setUserEmailCookie'])->name('setUserEmailCookie');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
 
 require __DIR__ . '/auth.php';
