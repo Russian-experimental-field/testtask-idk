@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <p>Your reservations</p>
-                    <table class="table">
+                    <table class="table" id="admin_reservations_table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
