@@ -35,6 +35,7 @@ class UserControllerTest extends TestCase
         $responce = $this->post('/userEmail', ['useremail' => 'varg@grishnak.com']);
 
         $responce->assertStatus(302);
+        $responce->assertRedirect('/');
         $responce->assertCookie('useremail', 'varg@grishnak.com');
     }
 }
