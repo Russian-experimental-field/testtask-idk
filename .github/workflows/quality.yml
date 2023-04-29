@@ -26,6 +26,7 @@ jobs:
             DB_CONNECTION: sqlite_testing
         # run: vendor/bin/phpunit --coverage-clover=coverage.xml
         run: |
+          cp .env.example .env
           php artisan key:generate
           php artisan test --env=test --coverage --coverage-clover=coverage.xml
       - name: Fix code coverage paths
